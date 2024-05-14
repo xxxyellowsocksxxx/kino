@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
     <!-- //Meta tag Keywords -->
-    <title>{{ movie.title }}</title>
+    <title>{% block title %}Django movies{% endblock title %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- //Meta tag Keywords -->
@@ -24,11 +24,25 @@
     <!-- //Fonts -->
 </head>
 <body>
-    <!-- mian-content -->
     <div id="page" class="page">
-
-        {# header #}
-        {% include "./include/header.html" %}
+        
+        {% block header %}
+            <div class="main-banner bg bg1" id="home" style=background-color: rgba(0, 0, 0, 0); margin-top: 0px; background-image: url({% static "single-post-pic.jpg" %});>
+        {% endblock header %}
+            <!-- hedaer -->
+            {% include "./include/header.html" %}
+        </div>
+        <!---->
+        <ol class="breadcrumb editContent">
+            <li class="breadcrumb-item">
+                <a href="index.html" class="editContent"
+                style="outline: none; cursor: inherit;">Home</a>
+            </li>
+            <li class="breadcrumb-item active editContent" style="outline: none; cursor: inherit;">
+                Single
+            </li>
+        </ol>
+        <!---->
 
         {% block content %}
             
