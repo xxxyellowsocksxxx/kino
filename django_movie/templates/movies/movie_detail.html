@@ -109,9 +109,9 @@
             <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
                 О фильме {{ movie.title }}</h3>
             <p>
-                <img src="{% static "images/about.jpg" %}" class="img-fluid" alt="">
-                <img src="{% static "images/admin.jpg" %}" class="img-fluid" alt="">
-                <img src="{% static "images/d1.jpg" %}" class="img-fluid" alt="">
+                {% for img in movie.movieshot_set.all%}
+                    <img src="{{ img.image.url }}" class="img-movie-shots" alt="img.description">
+                {% endfor %}
             </p>
             <p class="editContent" style="outline: none; cursor: inherit;">{{ movie.description }}</p>
             <p class="mt-3 italic-blue editContent"
@@ -131,55 +131,48 @@
                 <!-- contact form grid -->
                 <div class="contact-single">
                     <h3 class="editContent" style="outline: none; cursor: inherit;">
-                        <span class="sub-tittle editContent"
-                                style="outline: none; cursor: inherit;"></span>Оставить отзыв</h3>
-                    <form action="#" method="get" class="mt-4">
-                        <div class="form-group editContent"
-                                style="outline: none; cursor: inherit;">
-                            <label for="contactcomment" class="editContent"
-                                    style="outline: none; cursor: inherit;">Ваш комментарий
-                                *</label>
-                            <textarea class="form-control border" rows="5"
-                                        id="contactcomment" required=""></textarea>
+                        <span class="sub-tittle editContent"></span>Оставить отзыв</h3>
+                    <form action="{% url 'add_review' id=movie.id %}" method="POST" class="mt-4">
+                        {% csrf_token %}
+                        <div class="form-group editContent" style="outline: none; cursor: inherit;">
+                            <label for="contactcomment" class="editContent">
+                                Ваш комментарий *
+                            </label>
+                            <textarea class="form-control border" rows="5" id="contactcomment" required="" name="text">
+                            </textarea>
                         </div>
                         <div class="d-sm-flex">
-                            <div class="col-sm-6 form-group p-0 editContent"
-                                    style="outline: none; cursor: inherit;">
-                                <label for="contactusername" class="editContent"
-                                        style="outline: none; cursor: inherit;">Имя
-                                    *</label>
-                                <input type="text" class="form-control border"
-                                        id="contactusername" required="">
+                            <div class="col-sm-6 form-group p-0 editContent">
+                                <label for="contactusername" class="editContent">
+                                        Имя *
+                                </label>
+                                <input type="text" class="form-control border" id="contactusername" required="" name="name">
                             </div>
-                            <div class="col-sm-6 form-group ml-sm-3 editContent"
-                                    style="outline: none; cursor: inherit;">
-                                <label for="contactemail" class="editContent"
-                                        style="outline: none; cursor: inherit;">Email
-                                    *</label>
-                                <input type="email" class="form-control border"
-                                        id="contactemail" required="">
+                            <div class="col-sm-6 form-group ml-sm-3 editContent">
+                                <label for="contactemail" class="editContent">
+                                    Email *
+                                </label>
+                                <input type="email" class="form-control border" id="contactemail" required="" name="email">
                             </div>
                         </div>
-                        <button type="submit"
-                                class="mt-3 btn btn-success btn-block py-3"
-                                style="outline: none; cursor: inherit;">Отправить
+                        <button type="submit" class="mt-3 btn btn-success btn-block py-3">
+                            Отправить
                         </button>
                     </form>
                 </div>
                 <!--  //contact form grid ends here -->
             </div>
+            {% for review in movie.review_set.all %}
             <div class="media py-5">
-                <img src="{% static "images/te2.jpg" %}" class="mr-3 img-fluid" alt="image"
-                        style="outline: none; cursor: inherit;">
+                <img src="{% static "images/te2.jpg" %}" class="mr-3 img-fluid" alt="image">
                 <div class="media-body mt-4">
-                    <h5 class="mt-0 editContent"
-                        style="outline: none; cursor: inherit;">Daniel Doe</h5>
-                    <p class="mt-2 editContent" style="outline: none; cursor: inherit;">
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                        scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                        vulputate at, tempus viverra turpis.
+                    <h5 class="mt-0 editContent">
+                        {{ review.name }}
+                    </h5>
+                    <p class="mt-2 editContent">
+                        {{ review.text }}
                     </p>
-                    <div class="media mt-5 editContent"
+                    {% comment %} <div class="media mt-5 editContent"
                             style="outline: none; cursor: inherit;">
                         <a class="pr-3" href="#">
                             <img src="{% static "images/te1.jpg" %}" class="img-fluid "
@@ -195,9 +188,10 @@
                                 vestibulum in vulputate at, tempus viverra turpis. Fusce
                                 condimentum nunc ac nisi vulputate fringilla..</p>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock movie %}
