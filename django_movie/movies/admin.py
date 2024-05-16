@@ -52,7 +52,7 @@ class MovieAdmin(admin.ModelAdmin):
     save_as = True
     # позволить редактировать поле в списке
     list_editable = ('draft',)
-
+    # вывод миниатюры фотографии в списке
     readonly_fields = ('get_poster',)
     # группирование полей ввода
     fieldsets = (
@@ -76,8 +76,7 @@ class MovieAdmin(admin.ModelAdmin):
             'fields': (('url', 'draft'),)
         }),
     )
-
-    # вывод миниатюры фотографии в списке
+    # получение постера к фильму
 
     def get_poster(self, obj):
         return mark_safe(f'<img src={obj.poster.url} height="240">')

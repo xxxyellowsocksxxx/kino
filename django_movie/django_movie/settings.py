@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'ckeditor',
+    'ckeditor_uploader',
+
     'movies.apps.MoviesConfig',
 ]
 
@@ -122,6 +125,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_DIR = BASE_DIR.joinpath('./static')
 STATICFILES_DIRS = [STATIC_DIR]
+# STATIC_ROOT = BASE_DIR.joinpath('./static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('./media')
@@ -130,3 +134,5 @@ MEDIA_ROOT = BASE_DIR.joinpath('./media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
