@@ -27,6 +27,11 @@ class AddReview(View):
 
         if bound_form.is_valid():
             bound_form = bound_form.save(commit=False)
+
+            # присовение родителя отзыва
+            if request.POST.get('parent', None):
+                bound_form.parent_id = int(request.POST.get('parent'))
+
             bound_form.movie = movie
             bound_form.save()
 

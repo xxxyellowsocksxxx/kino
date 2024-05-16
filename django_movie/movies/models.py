@@ -91,6 +91,10 @@ class Movie(models.Model):
     def get_absolute_url(self):
         return reverse("movie_detail", kwargs={"slug": self.url})
 
+    # получение отзыва о фильме без родительских записей
+    def get_review(self):
+        return self.review_set.filter(parent__isnull=True)
+
 
 class MovieShot(models.Model):
     """ Кадры из фильма """
