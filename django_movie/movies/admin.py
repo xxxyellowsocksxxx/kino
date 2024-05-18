@@ -1,7 +1,20 @@
 from django.contrib import admin
+from django import forms
 from django.utils.safestring import mark_safe
 
 from movies.models import *
+
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+
+class MovieAdminForm(forms.ModelForm):
+    """Модифицированное поле ввода"""
+    description = forms.CharField(
+        label='Описание', widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
 
 
 @admin.register(Category)
@@ -52,6 +65,13 @@ class MovieAdmin(admin.ModelAdmin):
     save_as = True
     # позволить редактировать поле в списке
     list_editable = ('draft',)
+
+    # custom actions
+    actions = ['publish', 'unpublish']
+
+    # подключение модифицированного поля ввода
+    form = MovieAdminForm
+
     # вывод миниатюры фотографии в списке
     readonly_fields = ('get_poster',)
     # группирование полей ввода
@@ -82,6 +102,30 @@ class MovieAdmin(admin.ModelAdmin):
         return mark_safe(f'<img src={obj.poster.url} height="240">')
     # имя столбика с картинками
     get_poster.short_description = 'Изображениe'
+
+    def unpublish(self, request, queryset):
+        """Снять с публикации"""
+        row_update = queryset.update(draft=True)
+        if row_update == 1:
+            message_bit = "1 запись была обновлена"
+        else:
+            message_bit = f"{row_update} записей было обновлено"
+        self.message_user(request, f"{message_bit}")
+
+    def publish(self, request, queryset):
+        """Опубликовать"""
+        row_update = queryset.update(draft=False)
+        if row_update == 1:
+            message_bit = "1 запись была обновлена"
+        else:
+            message_bit = f"{row_update} записей было обновлено"
+        self.message_user(request, f"{message_bit}")
+
+    publish.short_description = 'Опубликовать'
+    publish.allow_permissions = ('change',)
+
+    unpublish.short_description = 'Снять с публикации'
+    unpublish.allow_permissions = ('change',)
 
 
 @ admin.register(Review)

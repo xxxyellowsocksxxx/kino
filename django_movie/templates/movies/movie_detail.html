@@ -106,15 +106,17 @@
         </div>
         <div class="row sub-para-w3layouts mt-5">
 
-            <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
+            <h3 class="shop-sing editContent">
                 О фильме {{ movie.title }}</h3>
             <p>
                 {% for img in movie.movieshot_set.all%}
                     <img src="{{ img.image.url }}" class="img-movie-shots" alt="img.description">
                 {% endfor %}
             </p>
-            <p class="editContent" style="outline: none; cursor: inherit;">{{ movie.description }}</p>
-            <p class="mt-3 italic-blue editContent"
+            <p class="editContent">
+                {{ movie.description|safe }}
+            </p>
+            {% comment %} <p class="mt-3 italic-blue editContent"
                 style="outline: none; cursor: inherit;">
                 <iframe width="560" height="315"
                         src="https://www.youtube.com/embed/A36LahZNUiE?controls=0"
@@ -123,7 +125,7 @@
                         allowfullscreen>
 
                 </iframe>
-            </p>
+            </p> {% endcomment %}
         </div>
         <hr>
         <div class="row">
