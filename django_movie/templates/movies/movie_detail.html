@@ -32,20 +32,26 @@
                     </li>
                     <li style="list-style: none"><span><b>Слоган:</b> {{ movie.tagline }}</span>
                     </li>
-                    <li style="list-style: none">
-                        <span><b>Режиссер:</b>
-                            {% for director in movie.director.all %}
-                                {{ director.name }}
-                            {% endfor %}</span></li>
+                    <li style="list-style: none"><span><b>Режиссер:</b>
+
+                        {% for director in movie.director.all %}
+                            {{ director.name }}
+                        {% endfor %}
+
+                    </span></li>
                     <li style="list-style: none"><span><b>Актеры:</b> 
-                            {% for actor in movie.actors.all %}
-                                {{ actor.name }}
-                            {% endfor %}
+    
+                        {% for actor in movie.actors.all %}
+                            {{ actor.name }}
+                        {% endfor %}
+    
                     </span></li>
                     <li style="list-style: none"><span><b>Жанр:</b>
+    
                         {% for genre in movie.genres.all %}
                             {{ genre.name }}
                         {% endfor %}
+    
                     </span></li>
                     <li style="list-style: none"><span><b>Премьера в мире:</b>{{ movie.worl_premiere }}</span>
                     </li>
@@ -57,18 +63,12 @@
                     </li>
                     <li style="list-style: none">
                         <a href="#"><b>Рейтинг:</b>
-                        <span class="fa fa-star" aria-hidden="true"
-                                style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                    style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                    style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                    style="outline: none; cursor: inherit;"></span>
-                            <span class="fa fa-star" aria-hidden="true"
-                                    style="outline: none; cursor: inherit;"></span>
-                            <span class="editContent"
-                                    style="outline: none; cursor: inherit;">5.0</span>
+                        <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="editContent">5.0</span>
                         </a>
                     </li>
                     <div class="share-desc">
@@ -80,22 +80,17 @@
                                 <li>
                                     <a href="#" class="w3pvt_facebook editContent"
                                         style="outline: none; cursor: inherit;">
-                                    <span class="fa fa-facebook-f"
-                                            style="outline: none; cursor: inherit;"></span>
+                                    <span class="fa fa-facebook-f"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="w3pvt_twitter editContent"
-                                        style="outline: none; cursor: inherit;">
-                                    <span class="fa fa-twitter"
-                                            style="outline: none; cursor: inherit;"></span>
+                                    <a href="#" class="w3pvt_twitter editContent">
+                                        <span class="fa fa-twitter"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="w3pvt_dribble editContent"
-                                        style="outline: none; cursor: inherit;">
-                                    <span class="fa fa-dribbble"
-                                            style="outline: none; cursor: inherit;"></span>
+                                    <a href="#" class="w3pvt_dribble editContent">
+                                    <span class="fa fa-dribbble"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -132,7 +127,7 @@
             <div class="single-form-left">
                 <!-- contact form grid -->
                 <div class="contact-single">
-                    <h3 class="editContent" style="outline: none; cursor: inherit;">
+                    <h3 class="editContent">
                         <!-- количество отзывов -->
                         <span class="sub-tittle editContent">{{ movie.review_set.count }}</span>
                         Оставить отзыв
