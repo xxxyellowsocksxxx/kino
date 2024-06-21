@@ -1,0 +1,62 @@
+{% extends "movies/base.html" %}
+{% load static %}
+
+{% block title %}{{ filmcrew.name }} - {{ block.super }} {% endblock title %}
+
+{% block header %}
+    <div class="main-banner inner bg bg1" id="home">
+{% endblock header %}
+
+
+{% block container %}
+    <div class="container py-md-3">
+{% endblock container %}
+
+{% block sidebar %}
+    <div class="side-bar col-lg-4">
+{% endblock sidebar %}
+
+{% block movie %}
+    <div class="left-ads-display col-lg-8">
+        <div class="row">
+            <div class="desc1-left col-md-6">
+                <img src="{{ filmcrew.image.url}}" class="img-fluid" alt="">
+            </div>
+            <div class="desc1-right col-md-6 pl-lg-4">
+                <h3 class="editContent" style="outline: none; cursor: inherit;">
+                    {{ filmcrew.name }}</h3>
+                <h5 class="editContent">{{ filmcrew.name }}</h5>
+                <ul>
+                    <li><span><b>Возраст:</b> {{ filmcrew.age }}</span></li>
+                    <li>
+                        <span>
+                            <b>Режиссер:</b>
+                                {% for movie in filmcrew.film_director.all %}
+                                    {{ movie.title }}
+                                {% endfor %}
+                        </span>
+                    </li>
+                    <li><span><b>Актер:</b> 
+
+                        {% for movie in filmcrew.film_actors.all %}
+                            {{ movie.title }}
+                        {% endfor %}
+    
+                    </span></li>
+                     
+            </div>
+        </div>
+        <div class="row sub-para-w3layouts mt-5">
+
+            <h3 class="shop-sing editContent">
+                О {{ filmcrew.name }}
+            </h3>
+  
+            <p class="editContent">
+                {{ filmcrew.description|safe }}
+            </p>
+             
+        </div>
+ 
+  
+{% endblock movie %}

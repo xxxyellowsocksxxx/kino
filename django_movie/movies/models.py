@@ -29,6 +29,9 @@ class FilmCrew(models.Model):
         verbose_name = "Съемочная группа"
         verbose_name_plural = "Съемочная группа"
 
+    def get_absolute_url(self):
+        return reverse('filmcrew_detail', kwargs={"slug": self.name})
+
     def __str__(self):
         return self.name
 
